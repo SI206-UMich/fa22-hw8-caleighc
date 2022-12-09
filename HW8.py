@@ -46,9 +46,14 @@ def barchart_restaurant_categories(db_filename):
     types = {}
     for item in count:
         types[item[0]] = item[1]
-    keys = types.keys()
-    values = types.values()
-    plt.bar(keys,values)
+    descending = sorted(types.items(), key=lambda x:x[1], reverse=False)
+    descending = dict(descending)
+    y = list(descending.keys())
+    x = list(descending.values())
+    plt.title("Types of Restaurants on South University Ave")
+    plt.ylabel('Restaurant Categories')
+    plt.xlabel('Number of Restaurants')
+    plt.barh(y,x)
     plt.show()
     return types
 
