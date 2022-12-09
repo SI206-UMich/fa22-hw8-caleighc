@@ -38,12 +38,19 @@ def barchart_restaurant_categories(db_filename):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_filename)
     cur = conn.cursor()
-    count = cur.execute("SELECT COUNT(category_id) \
-                        FROM restaurants JOIN categories \
-                        ON restaurants.category_id=categories.id").fetchall()
+    # count = cur.execute("SELECT categories.category COUNT(category_id) \
+    #                     FROM categories JOIN restaurants \
+    #                     ON restaurants.category_id=categories.id").fetchall()
+    # count = cur.execute("SELECT COUNT(restaurants.category_id),categories.category \
+    #                     FROM categories JOIN restaurants ON restaurants.category_id = categories.id").fetchall()
+    count = cur.execute("SELECT categories.category, COUNT(*)\
+                        FROM restaurants JOIN categories ON restaurants.category_id = categories.id \
+                        GROUP BY Category").fetchall()
     conn.commit()
-    print(count)
-    return count
+    dict = {}
+    for item in count:
+        dict[item[0]] = item[1]
+    return dict
 
 
 #EXTRA CREDIT
