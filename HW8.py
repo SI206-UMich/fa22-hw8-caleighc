@@ -4,6 +4,7 @@ import sqlite3
 import unittest
 
 # Caleigh Crossman
+# Caleighc
 
 def get_restaurant_data(db_filename):
     """
@@ -47,10 +48,10 @@ def barchart_restaurant_categories(db_filename):
                         FROM restaurants JOIN categories ON restaurants.category_id = categories.id \
                         GROUP BY Category").fetchall()
     conn.commit()
-    dict = {}
+    types = {}
     for item in count:
-        dict[item[0]] = item[1]
-    return dict
+        types[item[0]] = item[1]
+    return types
 
 
 #EXTRA CREDIT
