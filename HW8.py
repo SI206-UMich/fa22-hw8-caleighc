@@ -46,6 +46,10 @@ def barchart_restaurant_categories(db_filename):
     types = {}
     for item in count:
         types[item[0]] = item[1]
+    keys = types.keys()
+    values = types.values()
+    plt.bar(keys,values)
+    plt.show()
     return types
 
 #EXTRA CREDIT
